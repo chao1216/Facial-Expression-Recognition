@@ -1,6 +1,6 @@
 clc;
 close all;
-f = imread('KL.HA2.159.tiff');
+f = imread('./jaffe/YM.SU3.60.tiff');
 
 face = vision.CascadeObjectDetector('FrontalFaceLBP');
 face.MergeThreshold = 3;

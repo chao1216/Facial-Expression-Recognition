@@ -4,7 +4,7 @@ function [g,v] = LBP_clkwise(f)
 g = zeros(M,N, 'uint8');
 v = zeros(1,256);
 
-for x = M:M-1
+for x = 2:M-1
     cur_binary = '';
     for y = 2:N-1
         if f(x-1,y-1) > f(x,y)
