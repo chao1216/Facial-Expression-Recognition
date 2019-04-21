@@ -1,6 +1,7 @@
 function v = extractFeature(trainingSet)
 
 v = zeros(1,1024);
+tmp = [];
 
 for i = 1:trainingSet.Count
     im = read(trainingSet, i);
@@ -10,5 +11,9 @@ for i = 1:trainingSet.Count
     face = imcrop(im, bbox);
     face = imresize(face, [180,180]);
     feature_vec = decompose_LBP(face);
-    v = floor((v + feature_vec) / 2);
+    tmp = [tmp; feature_vec];
 end
+
+
+v = floor(mean(tmp,1));
+

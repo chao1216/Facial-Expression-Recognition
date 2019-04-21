@@ -1,7 +1,9 @@
 clc;
 close all;
 
-test_anger = imread('./jaffe/testing/YM.AN3.63.tiff');
+load('svm_classifier.mat');
+test_anger = imread('./jaffe/testing/KA.DI3.44.tiff');
+figure, imshow(test_anger);
 face = vision.CascadeObjectDetector('FrontalFaceLBP');
 face.MergeThreshold = 10;
 bbox = step(face, test_anger);
