@@ -1,52 +1,12 @@
 clc;
 close all;
 
-happy = imread('./jaffe/YM.HA3.54.tiff');
-sad = imread('./jaffe/YM.SA3.57.tiff');
-
-%test
-happy_t = imread('./jaffe/KR.SA1.77.tiff');
-
+test_anger = imread('./jaffe/testing/YM.AN3.63.tiff');
 face = vision.CascadeObjectDetector('FrontalFaceLBP');
-face.MergeThreshold = 3;
-bbox_happy = step(face, happy);
-happy_face = imcrop(happy, bbox_happy);
+face.MergeThreshold = 10;
+bbox = step(face, test_anger);
+anger_face = imcrop(test_anger, bbox);
+anger_face = imresize(anger_face, [180,180]);
+anger_vec = decompose_LBP(anger_face);
 
-bbox_sad = step(face, sad);
-sad_face = imcrop(sad, bbox_sad);
-
-bbox_happy_t = step(face, happy_t);
-happy_face_t = imcrop(happy_t, bbox_happy_t);
-
-
-happy_face = imresize(happy_face, [180,180]);
-sad_face = imresize(sad_face, [180,180]);
-happy_face_t = imresize(happy_face_t, [180,180]);
-
-happy_vec = decompose_LBP(happy_face);
-sad_vec = decompose_LBP(sad_face);
-
-happy_t_vec = decompose_LBP(happy_face_t);
-
-label = ["Happy","Sad"];
-
-tbl = [happy_vec;sad_vec];
-
-classifier = fitcecoc(tbl, label);
-
-predictedLabel = predict(classifier, happy_t_vec);
-
-disp(predictedLabel);
-
-
-
-%{
-[g,v] = LBP_clkwise(face);
-[g1,v1] = LBP_counter_clkwise(face);
-
-figure, imshow(g);
-figure, bar(v);
-
-figure, imshow(g1);
-figure, bar(v1);
-%}
+predictedLabel = predict(svm_classifier, anger_vec)
