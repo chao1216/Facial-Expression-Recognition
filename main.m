@@ -5,7 +5,7 @@ happy = imread('./jaffe/YM.HA3.54.tiff');
 sad = imread('./jaffe/YM.SA3.57.tiff');
 
 %test
-happy_t = imread('./jaffe/YM.HA1.52.tiff');
+happy_t = imread('./jaffe/KR.SA1.77.tiff');
 
 face = vision.CascadeObjectDetector('FrontalFaceLBP');
 face.MergeThreshold = 3;
@@ -29,6 +29,15 @@ sad_vec = decompose_LBP(sad_face);
 happy_t_vec = decompose_LBP(happy_face_t);
 
 label = ["Happy","Sad"];
+
+tbl = [happy_vec;sad_vec];
+
+classifier = fitcecoc(tbl, label);
+
+predictedLabel = predict(classifier, happy_t_vec);
+
+disp(predictedLabel);
+
 
 
 %{
