@@ -2,13 +2,16 @@ clc;
 close all;
 
 load('svm_classifier.mat');
-test_anger = imread('./jaffe/testing/KA.DI3.44.tiff');
-figure, imshow(test_anger);
+test = imread('./jaffe/test/disgust/KA.DI3.44.tiff');
+figure, imshow(test);
 face = vision.CascadeObjectDetector('FrontalFaceLBP');
 face.MergeThreshold = 10;
-bbox = step(face, test_anger);
-anger_face = imcrop(test_anger, bbox);
-anger_face = imresize(anger_face, [180,180]);
-anger_vec = decompose_LBP(anger_face);
+bbox = step(face, test);
+face_im = imcrop(test, bbox);
+face_im = imresize(face_im, [180,180]);
+feature_vec = decompose_LBP(face_im);
 
-predictedLabel = predict(svm_classifier, anger_vec)
+predictedLabel = predict(svm_classifier, feature_vec);
+if strcmp(predictedLabel{1}, "disgust")
+    disp("yes")
+end
