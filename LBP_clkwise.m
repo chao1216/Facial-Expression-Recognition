@@ -66,6 +66,7 @@ for x = 2:M-1
     end
 end
 
+v = extractHOGFeatures(g);
         
         
         

@@ -1,8 +1,10 @@
-function v = extractFeature(trainingSet)
+function [t_feature, t_label] = extractFeature(trainingSet, label)
 
 v = zeros(1,1024);
-tmp = [];
+v = [];
 
+t_feature = [];
+t_label = [];
 for i = 1:trainingSet.Count
     im = read(trainingSet, i);
     face_detect = vision.CascadeObjectDetector('FrontalFaceLBP');
@@ -10,10 +12,9 @@ for i = 1:trainingSet.Count
     bbox = step(face_detect, im);
     face = imcrop(im, bbox);
     face = imresize(face, [180,180]);
-    feature_vec = decompose_LBP(face);
-    tmp = [tmp; feature_vec];
+    training_feature = decompose_LBP(face);
+    t_feature = [t_feature; training_feature];
+    t_label = [t_label; label];
 end
 
-
-v = floor(mean(tmp,1));
 
