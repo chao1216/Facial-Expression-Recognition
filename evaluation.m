@@ -21,9 +21,9 @@ total = ha_testSet.Count + sa_testSet.Count + su_testSet.Count + ...
 
 s_ha = evaluate(ha_testSet, "happy");
 happy = s_ha / ha_testSet.Count
-s_sa = evaluate(fe_testSet, "sad");
+s_sa = evaluate(sa_testSet, "sad");
 sad = s_sa / sa_testSet.Count
-s_su = evaluate(fe_testSet, "surprise");
+s_su = evaluate(su_testSet, "surprise");
 suprise = s_su / su_testSet.Count
 s_fe = evaluate(fe_testSet, "fear");
 fear = s_fe / fe_testSet.Count

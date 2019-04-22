@@ -16,14 +16,21 @@ fe_trainingSet = imageSet(fe_dir,'recursive');
 an_trainingSet = imageSet(an_dir,'recursive');
 di_trainingSet = imageSet(di_dir,'recursive');
 
-[happy, ha_label] = extractFeature(ha_trainingSet, "happy");
-[sad, sa_label] = extractFeature(sa_trainingSet, "sad");
-[surprise, su_label] = extractFeature(su_trainingSet, "surprise");
-[fear, fe_label] = extractFeature(fe_trainingSet, "fear");
-[anger, an_label] = extractFeature(an_trainingSet, "anger");
-[disgust, di_label] = extractFeature(di_trainingSet, "disgust");
+disp("extracting happy...");
+[happy, ha_label] = extractFeature(ha_trainingSet, 'happy');
+disp("extracting sad...");
+[sad, sa_label] = extractFeature(sa_trainingSet, 'sad');
+disp("extracting surprise...");
+[surprise, su_label] = extractFeature(su_trainingSet, 'surprise');
+disp("extracting fear...");
+[fear, fe_label] = extractFeature(fe_trainingSet, 'fear');
+disp("extracting anger...");
+[anger, an_label] = extractFeature(an_trainingSet, 'anger');
+disp("extracting disgust...");
+[disgust, di_label] = extractFeature(di_trainingSet, 'disgust');
 
-classes = [ha_label; sa_label; su_label; fe_label; an_label; di_label];
+classes = {ha_label, sa_label, su_label, fe_label, an_label, di_label};
+classes = cat(2, classes{:});
 training = [happy; sad; surprise; fear; anger; disgust];
 
 svm_classifier = fitcecoc(training, classes);

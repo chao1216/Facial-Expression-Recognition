@@ -4,7 +4,7 @@ v = zeros(1,1024);
 v = [];
 
 t_feature = [];
-t_label = [];
+t_label = {};
 for i = 1:trainingSet.Count
     im = read(trainingSet, i);
     face_detect = vision.CascadeObjectDetector('FrontalFaceLBP');
@@ -14,7 +14,7 @@ for i = 1:trainingSet.Count
     face = imresize(face, [180,180]);
     training_feature = decompose_LBP(face);
     t_feature = [t_feature; training_feature];
-    t_label = [t_label; label];
+    t_label{end+1} = label;
 end
 
 
