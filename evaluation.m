@@ -7,6 +7,7 @@ su_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe
 fe_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/fear');
 an_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/anger');
 di_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/disgust');
+ne_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/neutral');
 
 ha_testSet = imageSet(ha_dir,'recursive');
 sa_testSet = imageSet(sa_dir,'recursive');
@@ -14,25 +15,30 @@ su_testSet = imageSet(su_dir,'recursive');
 fe_testSet = imageSet(fe_dir,'recursive');
 an_testSet = imageSet(an_dir,'recursive');
 di_testSet = imageSet(di_dir,'recursive');
+ne_testSet = imageSet(di_dir,'recursive');
+
 
 success = 0;
-total = ha_testSet.Count + sa_testSet.Count + su_testSet.Count + ...
-    + fe_testSet.Count + an_testSet.Count + di_testSet.Count;
+total = ha_testSet.Count + su_testSet.Count + ...
+    + fe_testSet.Count + an_testSet.Count + di_testSet.Count + ...
+    sa_testSet.Count;
 
-s_ha = evaluate(ha_testSet, "happy");
+s_ha = evaluate(ha_testSet, "Happy");
 happy = s_ha / ha_testSet.Count
-s_sa = evaluate(sa_testSet, "sad");
+s_sa = evaluate(sa_testSet, "Sad");
 sad = s_sa / sa_testSet.Count
-s_su = evaluate(su_testSet, "surprise");
+s_su = evaluate(su_testSet, "Surprise");
 suprise = s_su / su_testSet.Count
-s_fe = evaluate(fe_testSet, "fear");
+s_fe = evaluate(fe_testSet, "Fear");
 fear = s_fe / fe_testSet.Count
-s_an = evaluate(an_testSet, "anger");
+s_an = evaluate(an_testSet, "Anger");
 anger = s_an / an_testSet.Count
-s_di = evaluate(di_testSet, "disgust");
+s_di = evaluate(di_testSet, "Disgust");
 disgust = s_di / di_testSet.Count
+%s_ne = evaluate(ne_testSet, "neutral");
+%neutral = s_ne / ne_testSet.Count
 
-success = s_ha + s_sa + s_su + s_fe + s_an + s_di;
+success = s_ha + s_su + s_fe + s_an + s_di + s_sa;
 display("accuracy: ");
 display(success/total);
 
