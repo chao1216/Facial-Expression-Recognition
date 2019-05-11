@@ -1,13 +1,12 @@
 clc;
 close all;
 
-ha_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/happy');
-sa_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/sad');
-su_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/surprise');
-fe_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/fear');
-an_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/anger');
-di_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/disgust');
-ne_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/jaffe/test/neutral');
+ha_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/test/happy');
+sa_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/test/sad');
+su_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/test/surprise');
+fe_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/test/fear');
+an_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/test/anger');
+di_dir=('/Users/chaolin/Documents/EE4830/FER/Facial-Expression-Recognition/test/disgust');
 
 ha_testSet = imageSet(ha_dir,'recursive');
 sa_testSet = imageSet(sa_dir,'recursive');
@@ -15,8 +14,6 @@ su_testSet = imageSet(su_dir,'recursive');
 fe_testSet = imageSet(fe_dir,'recursive');
 an_testSet = imageSet(an_dir,'recursive');
 di_testSet = imageSet(di_dir,'recursive');
-ne_testSet = imageSet(di_dir,'recursive');
-
 
 success = 0;
 total = ha_testSet.Count + su_testSet.Count + ...
@@ -35,8 +32,6 @@ s_an = evaluate(an_testSet, "Anger");
 anger = s_an / an_testSet.Count
 s_di = evaluate(di_testSet, "Disgust");
 disgust = s_di / di_testSet.Count
-%s_ne = evaluate(ne_testSet, "neutral");
-%neutral = s_ne / ne_testSet.Count
 
 success = s_ha + s_su + s_fe + s_an + s_di + s_sa;
 display("accuracy: ");
